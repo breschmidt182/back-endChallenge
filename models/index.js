@@ -1,5 +1,5 @@
 const Payer = require('./Payer');
 const Points = require('./Points');
-const Transactions = require('./Transactions');
+// const Transactions = require('./Transactions');
 
-module.exports = {Payer, Points, Transactions};
+module.exports = {Payer, Points};

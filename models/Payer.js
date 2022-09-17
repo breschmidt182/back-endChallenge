@@ -7,12 +7,12 @@ const PayerSchema = new Schema(
 			type: String,
 			required: true
 		},
-		transactions: [
-			{
-				type: Schema.Types.ObjectId,
-				ref: 'Transtaction'
-			}
-		],
+		// transactions: [
+		// 	{
+		// 		type: Schema.Types.ObjectId,
+		// 		ref: 'Transtaction'
+		// 	}
+		// ],
 		points: {
 			type: Number,
 			timestamps: true
