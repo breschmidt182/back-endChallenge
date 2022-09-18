@@ -2,9 +2,11 @@ const {Payer} = require('../models');
 
 const payerController = {
 	createPayer({body},res) {
+		console.log(body);
 		Payer.create(body)
 		.then((dbNewPayer) => {
-			res.json(dbNewPayer, {message:'new payer created'})
+			console.log(dbNewPayer)
+			res.json({dbNewPayer, message:'new payer created'})
 		})
 		.catch((err) => { res.json(err) })
 	},
