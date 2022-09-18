@@ -6,7 +6,7 @@ const pointsController = {
 		.then(({_id}) => {
 			return Payer.findOneAndUpdate(
 				{ _id: params.payerId },
-				{ $push:{points: _id} },
+				{ $push:{points: total }},
 				{new: true }
 			);
 		})

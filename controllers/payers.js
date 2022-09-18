@@ -1,11 +1,9 @@
 const {Payer} = require('../models');
 
 const payerController = {
-	createPayer({body},res) {
-		console.log(body);
-		Payer.create(body)
+	createPayer(req,res) {
+		Payer.create(req.body)
 		.then((dbNewPayer) => {
-			console.log(dbNewPayer)
 			res.json({dbNewPayer, message:'new payer created'})
 		})
 		.catch((err) => { res.json(err) })
@@ -17,9 +15,9 @@ const payerController = {
 			if(!dbUpdatedPayer) {
 				res.json({message:'There is no account with that id. Please try again'})
 			}
-			res.json(dbUpdatedPayer, {message:'Payer profile updated'})
+			res.status(200).json({dbUpdatedPayer, message:'Payer profile updated'})
 		})
-		.catch((err) =>{ res.json(err)})
+		.catch((err) =>{ res.status(400).json(err)})
 	},
 
 	getAllPayers(req, res) {
