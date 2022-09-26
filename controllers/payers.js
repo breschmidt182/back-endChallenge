@@ -36,7 +36,7 @@ const payerController = {
 			}
 			res.json(dbSinglePayer);
 		})
-		.catch((err) => { res.json(err)})
+		.catch((err) => { res.status(400)})
 	},
 
 	deletePayer({params}, res) {

@@ -2,12 +2,17 @@ const {Payer, Points} = require('../models');
 
 const pointsController = {
 	addPoints({params, body}, res) {
-		Points.create(body)
+		Points.create({
+			total: body.total,
+			account: body.account
+		})
 		.then(({_id}) => {
-			return Payer.findOneAndUpdate(
-				{ _id: params.payerId },
-				{ $push:{points: total }},
-				{new: true }
+			return Payer.aggregate(
+				{ _id: params.payer._id },
+				console.log(_id),
+				{ $project: {payer: params.payer._id, points: {$add: ["$total", "$fee"]}}},
+				console.log(payer),
+				// {new: true }
 			);
 		})
 		.then((dbNewPoints) => {
@@ -22,7 +27,7 @@ const pointsController = {
 	spendPoints({params}, res) {
 		Points.findOneAndDelete({_id: params.id})
 		.then((dbSpendPts) => {
-			if(dbSpendPts > Points.total) {
+			if(dbSpendPts > Payer.points.length) {
 				res.json({message:'Cannot spend points. Total cannot go below 0'})
 			} else if (!dbSpendPts) {
 				res.json({message:'Cannot find points with that id'})
